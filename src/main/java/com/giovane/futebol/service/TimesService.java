@@ -14,25 +14,36 @@ public class TimesService {
     @Autowired
     TimesMapper mapper;
 
-    public void save(Times times){
-        this.mapper.insert(times);
+    public Times save(Times times) {
+        Optional<Times> timesUpdate = mapper.
+
+
+
+
+
     }
+//        mapper.insert(times);
+//        return times;
+
+
+
+
+
 
     public void update(Times times){
-        this.mapper.update(times);
+        mapper.update(times);
     }
 
-    public void delete(Integer timeId){
-        this.mapper.delete(timeId);
+    public void deleteId(Integer timeId){
+        mapper.deleteById(timeId);
+
     }
+
 
     public List<Times> select(){
-        List<Times> times = this.mapper.select();
+        List<Times> times = mapper.select();
         return times;
     }
 
-    public Optional<Times> select2(Integer timeId) {
-        return mapper.select2(timeId);
-    }
 
 }
