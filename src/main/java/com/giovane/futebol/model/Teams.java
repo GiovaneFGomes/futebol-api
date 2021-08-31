@@ -7,17 +7,17 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Times {
+public class Teams {
 
     private Integer id;
 
     @NotBlank
-    private String nome_time;
+    private String name_team;
 
     @NotBlank
-    private String nome_estadio;
+    private String name_stadium;
 
     @NotBlank
-    private String nome_estado;
+    private String name_country;
 
 }
