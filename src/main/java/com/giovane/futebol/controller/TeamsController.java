@@ -1,4 +1,5 @@
 package com.giovane.futebol.controller;
+
 import com.giovane.futebol.model.Teams;
 import com.giovane.futebol.service.TeamsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,10 @@ public class TeamsController {
         return service.save(teams);
     }
 
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    @PutMapping(path = "/team/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody Teams teams, @PathVariable("id") Integer id) {
-        service.updateTime(teams, id);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping(path = "/team/{id}")
+    public void update(@RequestBody @Valid Teams teams, @PathVariable("id") Integer id) {
+        service.updateTeam(teams, id);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
