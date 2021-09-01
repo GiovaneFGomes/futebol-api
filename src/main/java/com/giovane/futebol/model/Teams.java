@@ -11,13 +11,13 @@ public class Teams {
 
     private Integer id;
 
-    @NotBlank
+    @NotBlank(message = "The name_team field cannot be blank")
     private String name_team;
 
-    @NotBlank
+    @NotBlank(message = "The name_stadium field cannot be blank")
     private String name_stadium;
 
-    @NotBlank
+    @NotBlank(message = "The name_country field cannot be blank")
     private String name_country;
 
 }

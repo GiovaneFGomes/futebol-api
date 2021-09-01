@@ -5,6 +5,7 @@ import com.giovane.futebol.mapper.TeamsMapper;
 import com.giovane.futebol.model.Teams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -14,11 +15,11 @@ public class TeamsService {
     @Autowired
     TeamsMapper mapper;
 
-
     public Teams save(Teams team) {
         mapper.insert(team);
         return team;
     }
+
 
 
 
@@ -28,14 +29,17 @@ public class TeamsService {
             teams.setId(byId.get().getId());
             mapper.update(teams);
         }else{
-            throw new NotFoundException("Requested time/"+id+" does not have a time");
+            throw new NotFoundException("Requested tea/"+id+" does not have a team");
         }
     }
 
-
-
-    public void deleteId(Integer timeId){
-        mapper.deleteById(timeId);
+    public void deleteId(Integer id) {
+        Optional<Teams> byId = mapper.findById(id);
+        if (byId.isPresent()) {
+            mapper.deleteById(id);
+        }else{
+            throw new NotFoundException("Not found team");
+        }
     }
 
     public List<Teams> select(){
@@ -43,11 +47,9 @@ public class TeamsService {
         return teams;
     }
 
-
-
     public Teams select2(Integer id){
         return mapper.findById(id)
-                .orElseThrow(() -> new NotFoundException("Not found Time"));
+                .orElseThrow(() -> new NotFoundException("Not found team"));
     }
 
 }

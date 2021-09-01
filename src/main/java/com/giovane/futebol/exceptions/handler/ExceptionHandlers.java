@@ -7,13 +7,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class FutebolHandler {
-
+public class ExceptionHandlers {
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<?> notFoundException(NotFoundException exception){
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> notFoundException(NotFoundException e){
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
-
 
 }

@@ -15,7 +15,7 @@ public class TeamsController {
     @Autowired
     TeamsService service;
 
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/team", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Teams save(@RequestBody @Valid Teams teams) {
         return service.save(teams);
