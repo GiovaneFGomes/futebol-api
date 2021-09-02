@@ -1,4 +1,4 @@
-package com.giovane.futebol.exceptions;
+package com.giovane.futebol.exceptions.notfound;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

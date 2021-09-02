@@ -3,9 +3,9 @@ package com.giovane.futebol.model;
 import lombok.*;
 import javax.validation.constraints.NotBlank;
 
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
 public class Teams {
 

@@ -22,7 +22,7 @@ public class TeamsController {
         return service.save(teams);
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     @PutMapping(path = "/team/{id}")
     public void update(@RequestBody @Valid Teams teams, @PathVariable("id") Integer id) {
         service.updateTeam(teams, id);

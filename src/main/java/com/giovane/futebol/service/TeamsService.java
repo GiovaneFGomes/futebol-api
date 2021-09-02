@@ -1,6 +1,6 @@
 package com.giovane.futebol.service;
 
-import com.giovane.futebol.exceptions.NotFoundException;
+import com.giovane.futebol.exceptions.notfound.NotFoundException;
 import com.giovane.futebol.mapper.TeamsMapper;
 import com.giovane.futebol.model.Teams;
 import org.springframework.beans.factory.annotation.Autowired;

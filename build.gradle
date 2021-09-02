@@ -4,15 +4,14 @@ plugins {
 	id 'java'
 }
 
-group = 'com.giovane'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
-
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+task helloWorld (group: "MyGroupOfTasks", description: "Print hello world.") {
+	doFirst { println "doFirst: Hello, World!"}
 }
+
+task helloWorld2 (group: "MyGroupOfTasks", description: "Print hello world.") {
+	doLast  { println "doLast: Hello, world!" }
+}
+
 
 repositories {
 	mavenCentral()
