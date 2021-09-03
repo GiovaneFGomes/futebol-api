@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/soccer")
@@ -42,7 +43,7 @@ public class TeamsController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/team/{id}")
-    public Teams searchTeamById(@PathVariable("id") Integer id) {
+    public Optional<Teams> searchTeamById(@PathVariable("id") Integer id) {
         return service.select2(id);
     }
 
