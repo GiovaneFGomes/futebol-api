@@ -37,7 +37,7 @@ public class TeamsController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/teams")
-    public List<Teams> findAllTimes() {
+    public List<Teams> findAllTeams() {
         return service.select();
     }
 

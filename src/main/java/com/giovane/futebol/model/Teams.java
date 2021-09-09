@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 public class Teams {
 
     private Integer id;
-
+    
     @NotBlank(message = "The name_team field cannot be blank")
     private String name_team;
 
