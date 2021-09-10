@@ -1,7 +1,9 @@
 package com.giovane.futebol.model;
 
 import lombok.*;
-import javax.validation.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -10,14 +12,17 @@ import javax.validation.constraints.NotBlank;
 public class Teams {
 
     private Integer id;
-    
-    @NotBlank(message = "The name_team field cannot be blank")
-    private String name_team;
 
-    @NotBlank(message = "The name_stadium field cannot be blank")
-    private String name_stadium;
+    @NotNull
+    @Size(min = 3, max = 40, message = "min 3 and max 40 characters")
+    private String name;
 
-    @NotBlank(message = "The name_country field cannot be blank")
-    private String name_country;
+    @NotNull
+    @Size(min = 3, max = 50, message = "min 3 and max 50 characters")
+    private String stadium;
+
+    @NotNull
+    @Size(min = 5, max = 50, message = "min 5 and max 50 characters")
+    private String country;
 
 }

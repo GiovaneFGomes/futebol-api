@@ -2,7 +2,7 @@ package com.giovane.futebol.controller;
 
 import com.giovane.futebol.model.Teams;
 import com.giovane.futebol.service.TeamsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -10,12 +10,12 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping(value = "/soccer")
 public class TeamsController {
 
-    @Autowired
-    TeamsService service;
+    private final TeamsService service;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/team", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -23,7 +23,7 @@ public class TeamsController {
         return service.save(teams);
     }
 
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping(path = "/team/{id}")
     public void update(@RequestBody @Valid Teams teams, @PathVariable("id") Integer id) {
         service.updateTeam(teams, id);

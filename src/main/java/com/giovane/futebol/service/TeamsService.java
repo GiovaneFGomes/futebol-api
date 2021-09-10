@@ -3,16 +3,16 @@ package com.giovane.futebol.service;
 import com.giovane.futebol.exceptions.notfound.NotFoundException;
 import com.giovane.futebol.mapper.TeamsMapper;
 import com.giovane.futebol.model.Teams;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class TeamsService {
 
-    @Autowired
-    TeamsMapper mapper;
+    private final TeamsMapper mapper;
 
     public Teams save(Teams team) {
         mapper.insert(team);

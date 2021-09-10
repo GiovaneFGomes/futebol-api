@@ -1,22 +1,20 @@
 package com.giovane.futebol.exceptions.notfound;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.time.Instant;
+import java.util.Map;
 
 @SuperBuilder
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class NotFoundDetails {
-
+@Getter
+@Setter
+public class ErrorDetails{
     private String title;
     private Integer status;
-    private String details;
     private Instant timestamp;
     private String developerMessage;
+    private Map<String,String> detailsErrors;
 
 }
