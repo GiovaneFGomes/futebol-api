@@ -8,17 +8,19 @@ import java.util.Optional;
 @Mapper
 public interface TeamsMapper {
 
-    // INSERT INTO teams (name_team, name_stadium, name_country) VALUES ('inter','beira-rio', 'brazil');
-
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert(value = " INSERT INTO teams (name_team, name_stadium, name_country)   " +
-                    " VALUES ( #{teams.name, jdbcType=VARCHAR},                   " +
-                    "         #{teams.stadium, jdbcType=VARCHAR},                 " +
-                    "          #{teams.country, jdbcType=VARCHAR})                " )
+    @Insert(value = " INSERT INTO teams (name_team, name_stadium, name_country)      " +
+                    "            VALUES (#{teams.name, jdbcType=VARCHAR},            " +
+                    "                    #{teams.stadium, jdbcType=VARCHAR},         " +
+                    "                    #{teams.country, jdbcType=VARCHAR})         " )
     void insert(@Param("teams") Teams teams);
 
-    @Update("UPDATE teams SET name_team=#{teams.name_team},name_stadium=#{teams.name_stadium},name_country=#{teams.name_country} WHERE id=#{teams.id};")
-    void update(Teams teams);
+    @Update(value = " UPDATE teams                           " +
+                    "   SET name_team=#{teams.name},         " +
+                    "       name_stadium=#{teams.stadium},   " +
+                    "       name_country=#{teams.country}    " +
+                    " WHERE id=#{teams.id};                  " )
+    void update(@Param("teams") Teams teams);
 
     @Delete("DELETE FROM teams WHERE id=#{id};")
     void deleteById(Integer teamId);

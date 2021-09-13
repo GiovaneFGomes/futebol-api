@@ -41,7 +41,7 @@ public class ExceptionHandlers extends Throwable{
                 .status(HttpStatus.BAD_REQUEST.value())
                 .title("Method not valid")
                 .detailsErrors(errors)
-                .developerMessage("Error! Field(s) cannot be blank")
+                .developerMessage("Error! Field(s) cannot be null")
                 .build();
         return new ResponseEntity<>(notFoundDetails, HttpStatus.BAD_REQUEST);
     }
