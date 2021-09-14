@@ -1,9 +1,7 @@
 package com.giovane.futebol.exceptions.handler;
 
-import com.giovane.futebol.exceptions.badrequest.BadRequestDetails;
 import com.giovane.futebol.exceptions.details.ExceptionDetails;
-import com.giovane.futebol.exceptions.methodnotvalid.ErrorDetails;
-import com.giovane.futebol.exceptions.notfound.NotFoundDetails;
+import com.giovane.futebol.exceptions.details.MethodNotValidDetails;
 import com.giovane.futebol.exceptions.notfound.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,15 +36,15 @@ public class GlobalExceptionHandler extends Throwable{
         List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
         fieldErrors.forEach(p -> error.put(p.getField(), p.getDefaultMessage()));
 
-        ErrorDetails errorDetails;
-        errorDetails = ErrorDetails.builder()
+        MethodNotValidDetails methodNotValidDetails;
+        methodNotValidDetails = MethodNotValidDetails.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
-                .title("Method not valid")
+                .title("Body contains invalid JSON")
                 .timestamp(Instant.now())
                 .details(error)
                 .developerMessage("Error! Check the number of characters allowed.")
                 .build();
-        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(methodNotValidDetails, HttpStatus.BAD_REQUEST);
     }
 
 
@@ -57,7 +55,8 @@ public class GlobalExceptionHandler extends Throwable{
                 .status(HttpStatus.BAD_REQUEST.value())
                 .title("Bad request")
                 .timestamp(Instant.now())
-                .developerMessage("You sent a request that this server didn't understand")
+                .details("You sent a request that this server didn't understand")
+                .developerMessage("Check the request")
                 .build();
         return new ResponseEntity<>(exceptionDetails, HttpStatus.BAD_REQUEST);
     }

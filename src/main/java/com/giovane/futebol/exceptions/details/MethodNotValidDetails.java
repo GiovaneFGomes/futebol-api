@@ -1,4 +1,4 @@
-package com.giovane.futebol.exceptions.methodnotvalid;
+package com.giovane.futebol.exceptions.details;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -7,7 +7,7 @@ import java.util.Map;
 
 @SuperBuilder
 @Data
-public class ErrorDetails{
+public class MethodNotValidDetails {
 
     private Integer status;
     private String title;
