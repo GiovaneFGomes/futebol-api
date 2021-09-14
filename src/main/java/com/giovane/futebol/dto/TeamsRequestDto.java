@@ -1,5 +1,6 @@
 package com.giovane.futebol.dto;
 
+import com.giovane.futebol.annotation.EliminateSpace;
 import com.giovane.futebol.model.Teams;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,14 +18,17 @@ public class TeamsRequestDto {
 
     @Size(min = 3, max = 40, message = "min 3 and max 40 characters")
     @NotNull
+    @EliminateSpace(message = "must not contain whitespace")
     private String name;
 
     @Size(min = 3, max = 50, message = "min 3 and max 50 characters")
     @NotNull
+    @EliminateSpace(message = "must not contain whitespace")
     private String stadium;
 
     @Size(min = 5, max = 50, message = "min 5 and max 50 characters")
     @NotNull
+    @EliminateSpace(message = "must not contain whitespace")
     private String country;
 
     // construtor que recebe dados da model
@@ -36,16 +40,16 @@ public class TeamsRequestDto {
     }
 
 
-    public void setName(String name) {
-        this.name = name.strip();
-    }
-
-    public void setStadium(String stadium) {
-        this.stadium = stadium.strip();
-    }
-
-    public void setCountry(String country) {
-        this.country = country.strip();
-    }
+//    public void setName(String name) {
+//        this.name = name.strip();
+//    }
+//
+//    public void setStadium(String stadium) {
+//        this.stadium = stadium.strip();
+//    }
+//
+//    public void setCountry(String country) {
+//        this.country = country.strip();
+//    }
 
 }
