@@ -1,13 +1,13 @@
-package com.giovane.futebol.exceptions.notfound;
+package com.giovane.futebol.exceptions.details;
 
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
-import java.time.Instant;
 
+import java.time.Instant;
 
 @SuperBuilder
 @Data
-public class NotFoundDetails {
+public class ExceptionDetails {
 
     private Integer status;
     private String title;

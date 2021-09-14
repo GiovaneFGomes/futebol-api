@@ -26,13 +26,13 @@ public class TeamsController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping(path = "/team/{id}")
-    public void update(@RequestBody @Valid TeamRequestDto teams, @PathVariable("id") Integer id) {
-        service.update(teams, id);
+    public void updateTeam(@RequestBody @Valid TeamRequestDto team, @PathVariable("id") Integer id) {
+        service.update(team, id);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "/team/{id}")
-    public void delete(@PathVariable("id") Integer id) {
+    public void deleteTeam(@PathVariable("id") Integer id) {
         service.deleteById(id);
     }
 
