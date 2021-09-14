@@ -1,10 +1,9 @@
 package com.giovane.futebol.service;
 
-import com.giovane.futebol.dto.TeamsRequestDto;
-import com.giovane.futebol.dto.TeamsResponseDto;
+import com.giovane.futebol.dto.TeamRequestDto;
+import com.giovane.futebol.dto.TeamResponseDto;
 import com.giovane.futebol.exceptions.notfound.NotFoundException;
-import com.giovane.futebol.mapper.TeamsMapper;
-import com.giovane.futebol.model.Teams;
+import com.giovane.futebol.mapper.TeamMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -12,38 +11,38 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Service
-public class TeamsService {
+public class TeamService {
 
-    private final TeamsMapper mapper;
+    private final TeamMapper mapper;
 
-    public TeamsRequestDto save(TeamsRequestDto team) {
+    public TeamRequestDto save(TeamRequestDto team) {
         mapper.insert(team);
         return team;
     }
 
-    public void updateTeam(TeamsRequestDto teams, Integer id){
+    public void update(TeamRequestDto team, Integer id){
         verifyIfIdExist(id);
-        teams.setId(id);
-        mapper.update(teams);
+        team.setId(id);
+        mapper.update(team);
     }
 
-    public void deleteId(Integer id) {
+    public void deleteById(Integer id) {
       verifyIfIdExist(id);
       mapper.deleteById(id);
     }
 
-    public Optional<TeamsResponseDto> select2(Integer id){
+    public Optional<TeamResponseDto> findById(Integer id){
         verifyIfIdExist(id);
         return mapper.findById(id);
     }
 
-    public List<TeamsResponseDto> select(){
+    public List<TeamResponseDto> findAll(){
         return mapper.findAll();
     }
 
     private void verifyIfIdExist(Integer id){
         if(mapper.findById(id).isEmpty()){
-            throw new NotFoundException("Id not found"); // developerMessage
+            throw new NotFoundException("ID not found");
         }
     }
 

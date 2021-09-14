@@ -6,7 +6,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Data
-public class Teams {
+public class Team {
     private Integer id;
     private String name;
     private String stadium;

@@ -1,6 +1,6 @@
 package com.giovane.futebol.exceptions.handler;
 
-import com.giovane.futebol.exceptions.notfound.ErrorDetails;
+import com.giovane.futebol.exceptions.methodnotvalid.ErrorDetails;
 import com.giovane.futebol.exceptions.notfound.NotFoundDetails;
 import com.giovane.futebol.exceptions.notfound.NotFoundException;
 import org.springframework.http.HttpStatus;
@@ -19,31 +19,30 @@ public class ExceptionHandlers extends Throwable{
     public ResponseEntity<?> handlerNotFoundException(NotFoundException e){
         NotFoundDetails notFoundDetails;
         notFoundDetails = NotFoundDetails.builder()
-                .timestamp(Instant.now())
                 .status(HttpStatus.NOT_FOUND.value())
-                .title("Resource not found")
+                .title("Not found")
+                .timestamp(Instant.now())
                 .details(e.getMessage())
-                .developerMessage("Id not found")
+                .developerMessage("Include a valid ID. Make sure it exists.")
                 .build();
         return new ResponseEntity<>(notFoundDetails, HttpStatus.NOT_FOUND);
-
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> methodNotValid(MethodArgumentNotValidException e){
-        Map<String, String> errors = new HashMap<>();
+    public ResponseEntity<?> handlerMethodNotValid(MethodArgumentNotValidException e){
+        Map<String, String> error = new HashMap<>();
         List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
-        fieldErrors.forEach(p -> errors.put(p.getField(), p.getDefaultMessage()));
+        fieldErrors.forEach(p -> error.put(p.getField(), p.getDefaultMessage()));
 
-        ErrorDetails notFoundDetails;
-        notFoundDetails = ErrorDetails.builder()
-                .timestamp(Instant.now())
+        ErrorDetails errorDetails;
+        errorDetails = ErrorDetails.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
                 .title("Method not valid")
-                .detailsErrors(errors)
-                .developerMessage("Error! Check the number of characters allowed")
+                .timestamp(Instant.now())
+                .details(error)
+                .developerMessage("Error! Check the number of characters allowed.")
                 .build();
-        return new ResponseEntity<>(notFoundDetails, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
 }
