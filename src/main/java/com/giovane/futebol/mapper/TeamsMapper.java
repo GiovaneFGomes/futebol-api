@@ -1,5 +1,7 @@
 package com.giovane.futebol.mapper;
 
+import com.giovane.futebol.dto.TeamsRequestDto;
+import com.giovane.futebol.dto.TeamsResponseDto;
 import com.giovane.futebol.model.Teams;
 import org.apache.ibatis.annotations.*;
 import java.util.List;
@@ -13,14 +15,14 @@ public interface TeamsMapper {
                     "            VALUES (#{teams.name, jdbcType=VARCHAR},            " +
                     "                    #{teams.stadium, jdbcType=VARCHAR},         " +
                     "                    #{teams.country, jdbcType=VARCHAR})         " )
-    void insert(@Param("teams") Teams teams);
+    void insert(@Param("teams") TeamsRequestDto teams);
 
     @Update(value = " UPDATE teams                           " +
                     "   SET name_team=#{teams.name},         " +
                     "       name_stadium=#{teams.stadium},   " +
                     "       name_country=#{teams.country}    " +
                     " WHERE id=#{teams.id};                  " )
-    void update(@Param("teams") Teams teams);
+    void update(@Param("teams") TeamsRequestDto teams);
 
     @Delete("DELETE FROM teams WHERE id=#{id};")
     void deleteById(Integer teamId);
@@ -32,10 +34,10 @@ public interface TeamsMapper {
             @Result(property = "stadium", column = "name_stadium"),
             @Result(property = "country", column = "name_country"),
     })
-    List<Teams> findAll();
+    List<TeamsResponseDto> findAll();
 
     @Select("SELECT * FROM teams WHERE id=#{id}")
     @ResultMap("teamResultId")
-    Optional<Teams> findById(Integer id);
+    Optional<TeamsResponseDto> findById(Integer id);
 
 }

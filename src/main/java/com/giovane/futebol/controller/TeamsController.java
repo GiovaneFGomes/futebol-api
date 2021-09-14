@@ -1,12 +1,11 @@
 package com.giovane.futebol.controller;
 
-import com.giovane.futebol.model.Teams;
+import com.giovane.futebol.dto.TeamsRequestDto;
+import com.giovane.futebol.dto.TeamsResponseDto;
 import com.giovane.futebol.service.TeamsService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
@@ -21,13 +20,13 @@ public class TeamsController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/team", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Teams save(@RequestBody @Valid Teams teams) {
+    public TeamsRequestDto save(@RequestBody @Valid TeamsRequestDto teams) {
         return service.save(teams);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping(path = "/team/{id}")
-    public void update(@RequestBody @Valid Teams teams, @PathVariable("id") Integer id) {
+    public void update(@RequestBody @Valid TeamsRequestDto teams, @PathVariable("id") Integer id) {
         service.updateTeam(teams, id);
     }
 
@@ -37,15 +36,17 @@ public class TeamsController {
         service.deleteId(id);
     }
 
+    // check-dto
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/teams")
-    public List<Teams> findAllTeams() {
+    public List<TeamsResponseDto> findAllTeams() {
         return service.select();
     }
 
+    // check-dto
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/team/{id}")
-    public Optional<Teams> searchTeamById(@PathVariable("id") Integer id) {
+    public Optional<TeamsResponseDto> searchTeamById(@PathVariable("id") Integer id) {
         return service.select2(id);
     }
 

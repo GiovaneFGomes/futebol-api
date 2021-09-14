@@ -1,5 +1,7 @@
 package com.giovane.futebol.service;
 
+import com.giovane.futebol.dto.TeamsRequestDto;
+import com.giovane.futebol.dto.TeamsResponseDto;
 import com.giovane.futebol.exceptions.notfound.NotFoundException;
 import com.giovane.futebol.mapper.TeamsMapper;
 import com.giovane.futebol.model.Teams;
@@ -14,12 +16,12 @@ public class TeamsService {
 
     private final TeamsMapper mapper;
 
-    public Teams save(Teams team) {
+    public TeamsRequestDto save(TeamsRequestDto team) {
         mapper.insert(team);
         return team;
     }
 
-    public void updateTeam(Teams teams, Integer id){
+    public void updateTeam(TeamsRequestDto teams, Integer id){
         verifyIfIdExist(id);
         teams.setId(id);
         mapper.update(teams);
@@ -30,12 +32,12 @@ public class TeamsService {
       mapper.deleteById(id);
     }
 
-    public Optional<Teams> select2(Integer id){
+    public Optional<TeamsResponseDto> select2(Integer id){
         verifyIfIdExist(id);
         return mapper.findById(id);
     }
 
-    public List<Teams> select(){
+    public List<TeamsResponseDto> select(){
         return mapper.findAll();
     }
 
