@@ -1,6 +1,8 @@
 package com.giovane.futebol.dto;
 
+import com.fasterxml.jackson.databind.jsonschema.JsonSerializableSchema;
 import com.giovane.futebol.model.Team;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,14 +18,17 @@ public class TeamRequestDto {
 
     @NotBlank
     @Size(min = 3, max = 40, message = "Min 3 and Max 40 characters.")
+    @Schema(description = "This is a football team's name", example = "Real Madrid")
     private String name;
 
     @NotBlank
     @Size(min = 3, max = 50, message = "Min 3 and Max 40 characters.")
+    @Schema(description = "This is a football team's name stadium", example = "Santiago Bernabéu")
     private String stadium;
 
     @NotBlank
     @Size(min = 3, max = 50, message = "Min 3 and Max 40 characters.")
+    @Schema(description = "This is a football team's name country", example = "Spain")
     private String country;
 
     public TeamRequestDto(Team teams) {
