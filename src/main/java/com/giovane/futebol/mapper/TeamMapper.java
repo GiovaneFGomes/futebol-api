@@ -11,9 +11,9 @@ public interface TeamMapper {
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     @Insert(value = " INSERT INTO teams (name_team, name_stadium, name_country)      " +
-                    "            VALUES (#{team.name, jdbcType=VARCHAR},            " +
-                    "                    #{team.stadium, jdbcType=VARCHAR},         " +
-                    "                    #{team.country, jdbcType=VARCHAR})         " )
+                    "            VALUES (#{team.name, jdbcType=VARCHAR},             " +
+                    "                    #{team.stadium, jdbcType=VARCHAR},          " +
+                    "                    #{team.country, jdbcType=VARCHAR})          " )
     void insert(@Param("team") TeamRequestDto team);
 
     @Update(value = " UPDATE teams                          " +
@@ -22,9 +22,6 @@ public interface TeamMapper {
                     "        name_country=#{team.country}   " +
                     " WHERE  id=#{team.id};                 " )
     void update(@Param("team") TeamRequestDto team);
-
-    @Delete("DELETE FROM teams WHERE id=#{id};")
-    void deleteById(Integer team);
 
     @Select("SELECT id AS id,name_team,name_stadium,name_country FROM teams")
     @Results(id = "teamResultId" , value ={
@@ -38,5 +35,8 @@ public interface TeamMapper {
     @Select("SELECT * FROM teams WHERE id=#{id}")
     @ResultMap("teamResultId")
     Optional<TeamResponseDto> findById(Integer id);
+
+    @Delete("DELETE FROM teams WHERE id=#{id};")
+    void deleteById(Integer team);
 
 }

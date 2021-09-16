@@ -47,7 +47,7 @@ public class TeamsController {
     @DeleteMapping(path = "/team/{id}")
     @Operation(summary = "Delete a football team by ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Successful operation"),
+            @ApiResponse(responseCode = "204", description = "The football team has been deleted"),
             @ApiResponse(responseCode = "404", description = "There is no team with this ID yet")
     })
     public void deleteTeam(@PathVariable("id") Integer id) {
@@ -58,7 +58,7 @@ public class TeamsController {
     @GetMapping(path = "/teams")
     @Operation(summary = "List all football teams")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successful operation"),
+            @ApiResponse(responseCode = "200", description = "Successful operation. Shows all existing football teams"),
     })
     public List<TeamResponseDto> findAllTeams() {
         return service.findAll();
@@ -68,7 +68,7 @@ public class TeamsController {
     @GetMapping(path = "/team/{id}")
     @Operation(summary = "Return a single football team")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successful operation"),
+            @ApiResponse(responseCode = "200", description = "Successful operation. Shows a single existing football team"),
             @ApiResponse(responseCode = "400", description = "It was an incorrect request"),
             @ApiResponse(responseCode = "404", description = "Team's ID does not exist")
     })

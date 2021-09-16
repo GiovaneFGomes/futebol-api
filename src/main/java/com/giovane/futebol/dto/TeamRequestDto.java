@@ -1,6 +1,5 @@
 package com.giovane.futebol.dto;
 
-import com.fasterxml.jackson.databind.jsonschema.JsonSerializableSchema;
 import com.giovane.futebol.model.Team;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

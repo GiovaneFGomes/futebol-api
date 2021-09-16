@@ -7,8 +7,10 @@ import lombok.*;
 @Builder
 @Data
 public class Team {
+
     private Integer id;
     private String name;
     private String stadium;
     private String country;
+
 }
