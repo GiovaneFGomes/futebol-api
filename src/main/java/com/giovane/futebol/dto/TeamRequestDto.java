@@ -3,6 +3,7 @@ package com.giovane.futebol.dto;
 import com.giovane.futebol.model.Team;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
@@ -10,9 +11,11 @@ import javax.validation.constraints.Size;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
 public class TeamRequestDto {
 
+    @Schema(hidden = true)
     private Integer id;
 
     @NotBlank
