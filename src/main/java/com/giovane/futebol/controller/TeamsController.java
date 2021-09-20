@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/soccer")
+@RequestMapping(value = "/api/v1/soccer")
 public class TeamsController {
 
     private final TeamService service;
