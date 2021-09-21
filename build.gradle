@@ -4,15 +4,6 @@ plugins {
 	id 'java'
 }
 
-task helloWorld (group: "MyGroupOfTasks", description: "Print hello world.") {
-	doFirst { println "doFirst: Hello, World!"}
-}
-
-task helloWorld2 (group: "MyGroupOfTasks", description: "Print hello world.") {
-	doLast  { println "doLast: Hello, world!" }
-}
-
-
 repositories {
 	mavenCentral()
 }
