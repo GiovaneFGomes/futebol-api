@@ -13,7 +13,6 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI apiInfo() {
-
         return new OpenAPI()
                 .info(new Info()
                         .title("Soccer API REST")
