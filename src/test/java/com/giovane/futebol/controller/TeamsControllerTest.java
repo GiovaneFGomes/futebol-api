@@ -40,7 +40,7 @@ class TeamsControllerTest {
 
     // CHECK
     @Test
-    void post_201() throws Exception {
+    void save_team_201() throws Exception {
         TeamRequestDto teamRequestDto = TeamRequestDto.builder()
                 .id(1)
                 .name("Internacional")
@@ -55,7 +55,7 @@ class TeamsControllerTest {
 
     // CHECK
     @Test
-    void post_400() throws Exception {
+    void save_team_400() throws Exception {
         TeamRequestDto teamRequestDto = TeamRequestDto.builder()
                 .id(1)
                 .name("Internacional")
@@ -72,7 +72,7 @@ class TeamsControllerTest {
 
     // CHECK
     @Test
-    public void put_204() throws Exception {
+    public void update_team_204() throws Exception {
         TeamRequestDto teamRequestDto = TeamRequestDto.builder()
                 .name("Barcelona")
                 .stadium("Camp Nou")
@@ -88,7 +88,7 @@ class TeamsControllerTest {
 
     // CHECK
     @Test
-    public void put_400() throws Exception {
+    public void update_team_400() throws Exception {
         TeamRequestDto teamRequestDto = TeamRequestDto.builder()
                 .name("Barcelona")
                 .stadium("Camp Nou")
@@ -104,7 +104,7 @@ class TeamsControllerTest {
 
     // IT'S NOT YET FINISH
     @Test
-    public void put_404() throws Exception {
+    public void update_team_404() throws Exception {
         TeamRequestDto teamRequestDto = TeamRequestDto.builder()
                 .name("Barcelona")
                 .stadium("Camp Nou")
