@@ -37,6 +37,7 @@ class TeamsControllerTest {
     @MockBean
     TeamService teamService;
 
+
     // CHECK
     @Test
     void post_201() throws Exception {
@@ -54,6 +55,22 @@ class TeamsControllerTest {
 
     // CHECK
     @Test
+    public void put_204() throws Exception {
+        TeamRequestDto teamRequestDto = TeamRequestDto.builder()
+                .name("Barcelona")
+                .stadium("Camp Nou")
+                .country("Spain")
+                .build();
+
+        Mockito.when(teamService.save(teamRequestDto)).thenReturn(teamRequestDto);
+        mockMvc.perform(put("/api/v1/soccer/team/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(teamRequestDto)))
+                .andExpect(status().isNoContent());
+    }
+
+    // CHECK
+    @Test
     void delete_byId_204() throws Exception {
         mockMvc.perform(delete("/api/v1/soccer/team/1"))
                 .andExpect(status().isNoContent());
@@ -62,49 +79,31 @@ class TeamsControllerTest {
 
     // CHECK
     @Test
+    void find_all_200() throws Exception {
+        mockMvc.perform(get("/api/v1/soccer/teams"))
+                .andExpect(status().isOk());
+    }
+
+    // CHECK
+    @Test
     void find_ById_200() throws Exception {
         Mockito.when(teamService.findById(1)).thenReturn(Optional
                 .of(new TeamResponseDto(1, "Internacional", "Beira-rio", "Brazil")));
-        mockMvc.perform(get("/api/v1/soccer/team/1")).andExpect(status().isOk());
+        mockMvc.perform(get("/api/v1/soccer/team/1"))
+                .andExpect(status().isOk());
     }
+
+
+
 
 
 
 //    @Test
 //    public void find_ById_404() throws Exception {
-//        Mockito.when(teamService.findById(1)).thenReturn(Optional
-//                .of(new TeamResponseDto(1, "Internacional", "Beira-rio", "Brazil")));
 //        Mockito.when(teamService.findById(1)).thenReturn(Optional.empty());
-//        mockMvc.perform(get("/api/v1/soccer/team/3")).andExpect(status().isNotFound());
+//        mockMvc.perform(get("/api/v1/soccer/team/3"))
+//                .andExpect(status().isNotFound());
 //    }
-
-
-
-//
-//    @Test
-//    void put_204() throws Exception {
-//
-//        Team team = Team.builder()
-//                .id(1)
-//                .name("Internacional")
-//                .stadium("Beira-rio")
-//                .country("Brazil")
-//                .build();
-//
-//        TeamRequestDto teamRequestDto = TeamRequestDto.builder()
-//                .name("Barcelona")
-//                .country("Spain")
-//                .build();
-//
-//        Mockito.when(teamService.save(teamRequestDto)).thenReturn(teamRequestDto);
-//
-//
-//        mockMvc.perform(put("/api/v1/soccer/team/1")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(objectMapper.writeValueAsString(teamRequestDto)))
-//                .andExpect(status().isNoContent());
-//    }
-//
 
 
 
