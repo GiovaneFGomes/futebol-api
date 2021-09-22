@@ -3,6 +3,7 @@ package com.giovane.futebol.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.giovane.futebol.dto.TeamRequestDto;
 import com.giovane.futebol.dto.TeamResponseDto;
+import com.giovane.futebol.model.Team;
 import com.giovane.futebol.service.TeamService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @EnableWebMvc
 @ExtendWith(SpringExtension.class)
-@SpringBootTest()
+@SpringBootTest
 class TeamsControllerTest {
 
     @Autowired
@@ -36,11 +37,12 @@ class TeamsControllerTest {
     @MockBean
     TeamService teamService;
 
+    // CHECK
     @Test
     void post_201() throws Exception {
         TeamRequestDto teamRequestDto = TeamRequestDto.builder()
                 .id(1)
-                .name("Giovane")
+                .name("Internacional")
                 .stadium("Beira-rio")
                 .country("Brazil")
                 .build();
@@ -50,35 +52,59 @@ class TeamsControllerTest {
                 .andExpect(status().isCreated());
     }
 
-
-
-
-
-
+    // CHECK
     @Test
-    void findById_200() throws Exception {
+    void delete_byId_204() throws Exception {
+        mockMvc.perform(delete("/api/v1/soccer/team/1"))
+                .andExpect(status().isNoContent());
+
+    }
+
+    // CHECK
+    @Test
+    void find_ById_200() throws Exception {
         Mockito.when(teamService.findById(1)).thenReturn(Optional
-                .of(new TeamResponseDto(1, "fwd", "rrr", "gre")));
+                .of(new TeamResponseDto(1, "Internacional", "Beira-rio", "Brazil")));
         mockMvc.perform(get("/api/v1/soccer/team/1")).andExpect(status().isOk());
     }
 
-    @Test
-    public void findById_404() throws Exception {
-        Mockito.when(teamService.findById(1)).thenReturn(Optional.empty());
-        mockMvc.perform(get("/api/v1/soccer/team/3")).andExpect(status().isNotFound());
-    }
+
+
+//    @Test
+//    public void find_ById_404() throws Exception {
+//        Mockito.when(teamService.findById(1)).thenReturn(Optional
+//                .of(new TeamResponseDto(1, "Internacional", "Beira-rio", "Brazil")));
+//        Mockito.when(teamService.findById(1)).thenReturn(Optional.empty());
+//        mockMvc.perform(get("/api/v1/soccer/team/3")).andExpect(status().isNotFound());
+//    }
 
 
 
-
-    @Test
-    void delete_byId_200() throws Exception {
-        mockMvc.perform(delete("/api/v1/soccer/team/1"))
-                .andExpect(status().isOk());
-
-    }
-
-
+//
+//    @Test
+//    void put_204() throws Exception {
+//
+//        Team team = Team.builder()
+//                .id(1)
+//                .name("Internacional")
+//                .stadium("Beira-rio")
+//                .country("Brazil")
+//                .build();
+//
+//        TeamRequestDto teamRequestDto = TeamRequestDto.builder()
+//                .name("Barcelona")
+//                .country("Spain")
+//                .build();
+//
+//        Mockito.when(teamService.save(teamRequestDto)).thenReturn(teamRequestDto);
+//
+//
+//        mockMvc.perform(put("/api/v1/soccer/team/1")
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(objectMapper.writeValueAsString(teamRequestDto)))
+//                .andExpect(status().isNoContent());
+//    }
+//
 
 
 
