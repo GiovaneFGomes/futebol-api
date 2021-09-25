@@ -22,20 +22,19 @@ public class TeamService {
         return new TeamRequestDto(teamSave1);
     }
 
-    public TeamRequestDto update(TeamRequestDto team, Integer id){
-        verifyIfIdExist(id);
+    public void update(TeamRequestDto team, Integer id){
+        mapper.findById(id).orElseThrow(() -> new NotFoundException("ID not found"));
         Team team2 = team.createTeam(team);
-        Team teamSave2 = mapper.update(team2);
-        return new TeamRequestDto(teamSave2);
+        mapper.update(team2);
     }
 
     public void deleteById(Integer id) {
-      verifyIfIdExist(id);
-      mapper.deleteById(id);
+        mapper.findById(id).orElseThrow(() -> new NotFoundException("ID not found"));
+        mapper.deleteById(id);
     }
 
     public Optional<TeamResponseDto> findById(Integer id){
-        verifyIfIdExist(id);
+        mapper.findById(id).orElseThrow(() -> new NotFoundException("ID not found"));
         return mapper.findById(id);
     }
 
@@ -43,10 +42,6 @@ public class TeamService {
         return mapper.findAll();
     }
 
-    private void verifyIfIdExist(Integer id){
-        if(mapper.findById(id).isEmpty()){
-            throw new NotFoundException("ID not found");
-        }
-    }
+
 
 }
