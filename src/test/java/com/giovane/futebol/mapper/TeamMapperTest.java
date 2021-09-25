@@ -2,6 +2,7 @@ package com.giovane.futebol.mapper;
 
 import com.giovane.futebol.dto.TeamRequestDto;
 import com.giovane.futebol.dto.TeamResponseDto;
+import com.giovane.futebol.model.Team;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -43,7 +44,7 @@ class TeamMapperTest {
 
     @Test
     public void update_team(){
-        TeamRequestDto team = createTeam();
+        Team team = createTeam();
         team.setId(2);
         teamMapper.update(team);
          Optional<TeamResponseDto> byId = teamMapper.findById(2);
@@ -51,8 +52,8 @@ class TeamMapperTest {
     }
 
 
-    private TeamRequestDto createTeam() {
-        return TeamRequestDto.builder()
+    private Team createTeam() {
+        return Team.builder()
                 .id(1)
                 .name("Inter")
                 .stadium("Beira-rio")

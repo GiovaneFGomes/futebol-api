@@ -28,10 +28,10 @@ public class TeamsController {
             @ApiResponse(responseCode = "201", description = "Team was created"),
             @ApiResponse(responseCode = "400", description = "An incorrect request has been sent")
     })
+
     public TeamRequestDto saveTeam(@RequestBody @Valid TeamRequestDto team) {
         return service.save(team);
     }
-
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping(path = "/team/{id}")
     @Operation(summary = "Update a football team")

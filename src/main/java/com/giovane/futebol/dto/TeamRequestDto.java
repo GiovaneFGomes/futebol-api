@@ -40,6 +40,15 @@ public class TeamRequestDto {
         this.country = teams.getCountry();
     }
 
+
+    public Team createTeam(TeamRequestDto team){
+        return Team.builder()
+                .name(team.getName())
+                .stadium(team.getStadium())
+                .country(team.getCountry())
+                .build();
+    }
+
     public void setName(String name) {
         this.name = name.strip();
     }

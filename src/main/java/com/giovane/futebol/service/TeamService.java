@@ -4,6 +4,7 @@ import com.giovane.futebol.dto.TeamRequestDto;
 import com.giovane.futebol.dto.TeamResponseDto;
 import com.giovane.futebol.exceptions.notfound.NotFoundException;
 import com.giovane.futebol.mapper.TeamMapper;
+import com.giovane.futebol.model.Team;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -16,14 +17,16 @@ public class TeamService {
     private final TeamMapper mapper;
 
     public TeamRequestDto save(TeamRequestDto team) {
-        mapper.insert(team);
-        return team;
+        Team team1 = team.createTeam(team);
+        Team teamSave1 = mapper.insert(team1);
+        return new TeamRequestDto(teamSave1);
     }
 
-    public void update(TeamRequestDto team, Integer id){
+    public TeamRequestDto update(TeamRequestDto team, Integer id){
         verifyIfIdExist(id);
-        team.setId(id);
-        mapper.update(team);
+        Team team2 = team.createTeam(team);
+        Team teamSave2 = mapper.update(team2);
+        return new TeamRequestDto(teamSave2);
     }
 
     public void deleteById(Integer id) {
