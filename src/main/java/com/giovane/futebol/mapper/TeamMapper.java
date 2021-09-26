@@ -26,7 +26,7 @@ public interface TeamMapper {
                                        name_country=#{team.country}
                     WHERE  id=#{team.id};)
                     """)
-    Team update(@Param("team") Team team);
+    void update(@Param("team") Team team);
 
     @Select("SELECT id AS id,name_team,name_stadium,name_country FROM teams")
     @Results(id = "teamResultId" , value ={
