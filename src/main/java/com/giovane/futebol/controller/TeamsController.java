@@ -1,7 +1,7 @@
 package com.giovane.futebol.controller;
 
-import com.giovane.futebol.dto.TeamRequestDto;
-import com.giovane.futebol.dto.TeamResponseDto;
+import com.giovane.futebol.model.dto.TeamRequestDto;
+import com.giovane.futebol.model.dto.TeamResponseDto;
 import com.giovane.futebol.service.TeamService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

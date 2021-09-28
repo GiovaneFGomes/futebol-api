@@ -1,6 +1,6 @@
 package com.giovane.futebol.mapper;
 
-import com.giovane.futebol.dto.TeamResponseDto;
+import com.giovane.futebol.model.dto.TeamResponseDto;
 import com.giovane.futebol.model.Team;
 import org.apache.ibatis.annotations.*;
 import java.util.List;
@@ -14,7 +14,7 @@ public interface TeamMapper {
             "        VALUES (#{team.name, jdbcType=VARCHAR},                      " +
             "                #{team.stadium, jdbcType=VARCHAR},                   " +
             "                #{team.country, jdbcType=VARCHAR})                   " )
-    Team insert(@Param("team") Team team);
+    Long insert(@Param("team") Team team);
 
     @Update(value = " UPDATE teams                               " +
             "         SET    name_team=#{team.name},             " +

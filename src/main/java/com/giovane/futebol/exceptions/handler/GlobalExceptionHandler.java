@@ -9,16 +9,20 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.w3c.dom.html.HTMLBaseElement;
 
 import java.time.Instant;
 import java.util.*;
 
-@ControllerAdvice
-public class GlobalExceptionHandler extends Throwable{
+@RestControllerAdvice
+public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<?> handlerNotFoundException(NotFoundException e){
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ExceptionDetails handlerNotFoundException(NotFoundException e){
         ExceptionDetails exceptionDetails;
         exceptionDetails = ExceptionDetails.builder()
                 .status(HttpStatus.NOT_FOUND.value())
@@ -27,11 +31,12 @@ public class GlobalExceptionHandler extends Throwable{
                 .details(e.getMessage())
                 .developerMessage("Include a valid ID. Make sure it exists.")
                 .build();
-        return new ResponseEntity<>(exceptionDetails, HttpStatus.NOT_FOUND);
+        return exceptionDetails;
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> handlerMethodNotValid(MethodArgumentNotValidException e){
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public MethodNotValidDetails handlerMethodNotValid(MethodArgumentNotValidException e){
         Map<String, String> error = new HashMap<>();
         List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
         fieldErrors.forEach(p -> error.put(p.getField(), p.getDefaultMessage()));
@@ -44,12 +49,13 @@ public class GlobalExceptionHandler extends Throwable{
                 .details(error)
                 .developerMessage("Error! Check the number of characters allowed.")
                 .build();
-        return new ResponseEntity<>(methodNotValidDetails, HttpStatus.BAD_REQUEST);
+        return methodNotValidDetails;
     }
 
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Object> handlerBadRequest(Exception e, WebRequest request){
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionDetails handlerBadRequest(Exception e){
         ExceptionDetails exceptionDetails;
         exceptionDetails = ExceptionDetails.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
@@ -58,7 +64,7 @@ public class GlobalExceptionHandler extends Throwable{
                 .details("You sent a request that this server didn't understand")
                 .developerMessage("Check the request")
                 .build();
-        return new ResponseEntity<>(exceptionDetails, HttpStatus.BAD_REQUEST);
+        return exceptionDetails;
     }
 
 }

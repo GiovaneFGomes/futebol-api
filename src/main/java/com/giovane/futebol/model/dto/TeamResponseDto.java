@@ -1,7 +1,8 @@
-package com.giovane.futebol.dto;
+package com.giovane.futebol.model.dto;
 
 import com.giovane.futebol.model.Team;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jdk.jfr.Description;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 

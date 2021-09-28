@@ -1,7 +1,7 @@
 package com.giovane.futebol.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.giovane.futebol.dto.TeamRequestDto;
+import com.giovane.futebol.model.dto.TeamRequestDto;
 import com.giovane.futebol.service.TeamService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,6 +31,8 @@ class TeamsControllerTest {
 
     @MockBean
     TeamService teamService;
+
+    // todo deveriaRetornarUm201QuandoReceberTimeValida
 
     @Test
     void save_team_201() throws Exception {

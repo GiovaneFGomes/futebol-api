@@ -1,6 +1,6 @@
 package com.giovane.futebol.mapper;
 
-import com.giovane.futebol.dto.TeamResponseDto;
+import com.giovane.futebol.model.dto.TeamResponseDto;
 import com.giovane.futebol.model.Team;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,7 @@
 package com.giovane.futebol.service;
 
-import com.giovane.futebol.dto.TeamRequestDto;
-import com.giovane.futebol.dto.TeamResponseDto;
+import com.giovane.futebol.model.dto.TeamRequestDto;
+import com.giovane.futebol.model.dto.TeamResponseDto;
 import com.giovane.futebol.exceptions.notfound.NotFoundException;
 import com.giovane.futebol.mapper.TeamMapper;
 import com.giovane.futebol.model.Team;
@@ -17,8 +17,8 @@ public class TeamService {
 
     public TeamResponseDto saveTeam(TeamRequestDto team) {
         Team team1 = team.createTeam(team);
-        Team team2 = mapper.insert(team1);
-        return new TeamResponseDto(team2);
+        mapper.insert(team1);
+        return new TeamResponseDto(team1);
     }
 
     public TeamResponseDto updateTeamById(TeamRequestDto team, Integer id){
