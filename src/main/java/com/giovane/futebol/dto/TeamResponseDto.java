@@ -2,16 +2,15 @@ package com.giovane.futebol.dto;
 
 import com.giovane.futebol.model.Team;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 @Data
-public class TeamResponseDto {
+public class TeamResponseDto extends Team {
 
     @Schema(example = "1")
     private Integer id;

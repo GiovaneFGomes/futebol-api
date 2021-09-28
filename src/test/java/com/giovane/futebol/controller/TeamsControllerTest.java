@@ -3,10 +3,8 @@ package com.giovane.futebol.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.giovane.futebol.dto.TeamRequestDto;
 import com.giovane.futebol.service.TeamService;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,15 +14,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import java.util.Optional;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc
 @EnableWebMvc
-@ExtendWith(SpringExtension.class)
 @SpringBootTest
+@ExtendWith(SpringExtension.class)
 class TeamsControllerTest {
 
     @Autowired
@@ -71,8 +67,6 @@ class TeamsControllerTest {
                 .stadium("Camp Nou")
                 .country("Spain")
                 .build();
-
-        Mockito.when(teamService.save(teamRequestDto)).thenReturn(teamRequestDto);
         mockMvc.perform(put("/api/v1/soccer/team/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(teamRequestDto)))
@@ -94,7 +88,7 @@ class TeamsControllerTest {
 
     @Test
     void delete_byId_204() throws Exception {
-        mockMvc.perform(delete("/api/v1/soccer/team/1"))
+        mockMvc.perform(delete("/api/v1/soccer/team/20"))
                 .andExpect(status().isNoContent());
 
     }
@@ -122,6 +116,5 @@ class TeamsControllerTest {
         mockMvc.perform(get("/api/v1/soccer/team/g"))
                 .andExpect(status().isBadRequest());
     }
-
 
 }

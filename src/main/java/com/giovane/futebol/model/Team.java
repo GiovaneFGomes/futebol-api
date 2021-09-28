@@ -1,16 +1,15 @@
 package com.giovane.futebol.model;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 @Data
 public class Team {
-
     private Integer id;
     private String name;
     private String stadium;
     private String country;
-
 }

@@ -40,7 +40,6 @@ public class TeamRequestDto {
         this.country = teams.getCountry();
     }
 
-
     public Team createTeam(TeamRequestDto team){
         return Team.builder()
                 .name(team.getName())

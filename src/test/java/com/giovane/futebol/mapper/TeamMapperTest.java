@@ -1,8 +1,8 @@
 package com.giovane.futebol.mapper;
 
-import com.giovane.futebol.dto.TeamRequestDto;
 import com.giovane.futebol.dto.TeamResponseDto;
 import com.giovane.futebol.model.Team;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,34 +21,49 @@ class TeamMapperTest {
 
     @Autowired
     TeamMapper teamMapper;
-    
+
+
     @Test
+    @Disabled
     void save_team() {
         teamMapper.insert(createTeam());
         int size = teamMapper.findAll().size();
-        assertEquals(1, size);
+        assertEquals(2, size);
     }
 
     @Test
-    public void list_all_teams() {
+    @Disabled
+    void update_team_by_Id(){
+        Team team = createTeam();
+        teamMapper.findAll();
+        teamMapper.update(team);
+        Optional<TeamResponseDto>team1 = teamMapper.findById(team.getId());
+        assertEquals(1,team1);
+    }
+
+
+    @Test
+    void find_team_by_Id() {
+
+    }
+
+
+    @Test
+    void team_Id_not_found() {
+        assertEquals(Optional.empty(), teamMapper.findById(1));
+    }
+
+    @Test
+    void list_all_teams() {
         int size = teamMapper.findAll().size();
         assertEquals(0, size);
     }
 
     @Test
-    public void delete_team_byId() {
+    void delete_team_by_Id() {
         teamMapper.deleteById(1);
         List<TeamResponseDto> listCliente = teamMapper.findAll();
         assertEquals(0, listCliente.size());
-    }
-
-    @Test
-    public void update_team(){
-        Team team = createTeam();
-        team.setId(2);
-        teamMapper.update(team);
-         Optional<TeamResponseDto> byId = teamMapper.findById(2);
-        assertEquals("Modificado", byId.isPresent());
     }
 
 
@@ -60,4 +75,5 @@ class TeamMapperTest {
                 .country("Brazil")
                 .build();
     }
+
 }

@@ -48,7 +48,7 @@ public class GlobalExceptionHandler extends Throwable{
     }
 
 
-    @ExceptionHandler(value = {Exception.class})
+    @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handlerBadRequest(Exception e, WebRequest request){
         ExceptionDetails exceptionDetails;
         exceptionDetails = ExceptionDetails.builder()

@@ -12,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
@@ -28,10 +27,11 @@ public class TeamsController {
             @ApiResponse(responseCode = "201", description = "Team was created"),
             @ApiResponse(responseCode = "400", description = "An incorrect request has been sent")
     })
-
-    public TeamRequestDto saveTeam(@RequestBody @Valid TeamRequestDto team) {
-        return service.save(team);
+    public TeamResponseDto saveTeam(@RequestBody @Valid TeamRequestDto team) {
+        return service.saveTeam(team);
     }
+
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping(path = "/team/{id}")
     @Operation(summary = "Update a football team")
@@ -40,9 +40,10 @@ public class TeamsController {
             @ApiResponse(responseCode = "400", description = "An incorrect request has been sent"),
             @ApiResponse(responseCode = "404", description = "Team's ID does not exist")
     })
-    public void updateTeam(@RequestBody @Valid TeamRequestDto team, @PathVariable("id") Integer id) {
-        service.update(team, id);
+    public TeamResponseDto updateTeam(@RequestBody @Valid TeamRequestDto team, @PathVariable("id") Integer id) {
+        return service.updateTeamById(team, id);
     }
+
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "/team/{id}")
@@ -53,8 +54,9 @@ public class TeamsController {
             @ApiResponse(responseCode = "404", description = "Team's ID does not exist")
     })
     public void deleteTeam(@PathVariable("id") Integer id) {
-        service.deleteById(id);
+        service.deleteTeamById(id);
     }
+
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/teams")
@@ -63,8 +65,9 @@ public class TeamsController {
             @ApiResponse(responseCode = "200", description = "Shows all football teams"),
     })
     public List<TeamResponseDto> findAllTeams() {
-        return service.findAll();
+        return service.findAllTeams();
     }
+
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/team/{id}")
@@ -74,8 +77,8 @@ public class TeamsController {
             @ApiResponse(responseCode = "400", description = "An incorrect request has been sent"),
             @ApiResponse(responseCode = "404", description = "Team's ID does not exist")
     })
-    public Optional<TeamResponseDto> searchTeamById(@PathVariable("id") Integer id) {
-        return service.findById(id);
+    public TeamResponseDto searchTeamById(@PathVariable("id") Integer id) {
+        return service.findTeamById(id);
     }
 
 }
