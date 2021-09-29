@@ -1,1 +1,6 @@
 rootProject.name = 'futebol'
+
+include 'model'
+include 'service'
+include 'controller'
+include 'mapper'
