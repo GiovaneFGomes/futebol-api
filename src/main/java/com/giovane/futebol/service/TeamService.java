@@ -22,11 +22,10 @@ public class TeamService {
     }
 
     public TeamResponseDto updateTeamById(TeamRequestDto team, Integer id){
-        mapper.findById(id)
-                .orElseThrow(() -> new NotFoundException("ID not found"));
+        mapper.findById(id).orElseThrow(() -> new NotFoundException("ID not found"));
         Team team1 = team.createTeam(team);
-        Team team2 = mapper.update(team1);
-        return new TeamResponseDto(team2);
+        mapper.update(team1);
+        return new TeamResponseDto(team1);
     }
 
     public void deleteTeamById(Integer id) {

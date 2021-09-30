@@ -14,14 +14,28 @@ public interface TeamMapper {
             "        VALUES (#{team.name, jdbcType=VARCHAR},                      " +
             "                #{team.stadium, jdbcType=VARCHAR},                   " +
             "                #{team.country, jdbcType=VARCHAR})                   " )
-    Long insert(@Param("team") Team team);
+    Team insert(@Param("team") Team team);
 
-    @Update(value = " UPDATE teams                               " +
-            "         SET    name_team=#{team.name},             " +
-            "                name_stadium=#{team.stadium},       " +
-            "                name_country=#{team.country}        " +
-            "         WHERE  id=#{team.id};)                     " )
-    Team update(@Param("team") Team team);
+
+
+
+//    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+//    @ResultMap("teamResultId")
+//    @Select(value = "INSERT INTO teams (name_team, name_stadium, name_country)    " +
+//            "        VALUES (#{team.name, jdbcType=VARCHAR},                      " +
+//            "                #{team.stadium, jdbcType=VARCHAR},                   " +
+//            "                #{team.country, jdbcType=VARCHAR})                   " )
+//    Team insert(@Param("team") Team team);
+//
+
+
+
+    @Update(value = " UPDATE teams                                         " +
+            " SET    name_team=#{team.name, jdbcType=VARCHAR},             " +
+            "        name_stadium=#{team.stadium, jdbcType=VARCHAR},       " +
+            "        name_country=#{team.country, jdbcType=VARCHAR}        " +
+            " WHERE  id=#{team.id};                                        " )
+    void update(@Param("team") Team team);
 
     @Select("SELECT id AS id, name_team, name_stadium, name_country FROM teams")
     @Results(id = "teamResultId" , value ={
