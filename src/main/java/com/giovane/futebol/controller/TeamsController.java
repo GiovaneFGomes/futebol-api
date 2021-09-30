@@ -1,5 +1,6 @@
 package com.giovane.futebol.controller;
 
+import com.giovane.futebol.annotations.TeamGetStandardCodes;
 import com.giovane.futebol.model.dto.TeamRequestDto;
 import com.giovane.futebol.model.dto.TeamResponseDto;
 import com.giovane.futebol.service.TeamService;
@@ -71,12 +72,7 @@ public class TeamsController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/team/{id}")
-    @Operation(summary = "Return a single football team")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Shows a single football team"),
-            @ApiResponse(responseCode = "400", description = "An incorrect request has been sent"),
-            @ApiResponse(responseCode = "404", description = "Team's ID does not exist")
-    })
+    @TeamGetStandardCodes
     public TeamResponseDto searchTeamById(@PathVariable("id") Integer id) {
         return service.findTeamById(id);
     }
